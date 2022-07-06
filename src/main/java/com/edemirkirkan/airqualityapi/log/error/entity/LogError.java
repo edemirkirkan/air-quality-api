@@ -1,4 +1,4 @@
-package com.edemirkirkan.airqualityapi.log.entity;
+package com.edemirkirkan.airqualityapi.log.error.entity;
 
 import com.edemirkirkan.airqualityapi.gen.base.BaseEntity;
 import lombok.Getter;
@@ -9,13 +9,13 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "LOG_INFO")
+@Table(name = "LOG_ERROR")
 @Getter
 @Setter
-public class LogInfo extends BaseEntity {
+public class LogError extends BaseEntity {
     @Id
-    @SequenceGenerator(name = "LogInfo", sequenceName = "LOG_INFO_ID_SEQ")
-    @GeneratedValue(generator = "LogInfo")
+    @SequenceGenerator(name = "LogError", sequenceName = "LOG_ERROR_ID_SEQ")
+    @GeneratedValue(generator = "LogError")
     private Long id;
 
     @Column(name = "ID_USR_USER")

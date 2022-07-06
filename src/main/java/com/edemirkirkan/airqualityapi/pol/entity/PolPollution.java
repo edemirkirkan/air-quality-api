@@ -18,20 +18,20 @@ public class PolPollution extends BaseEntity {
     @GeneratedValue(generator = "PolPollution")
     private Long id;
 
-    @Column(name="DATE", nullable = false)
+    @Column(name="DATE", length = 20, nullable = false)
     private String date;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_CTY_CITY")
     private CtyCity ctyCity;
 
-    @Column(name = "CO", precision = 25, scale = 20, nullable = false)
+    @Column(name = "CO", precision = 13, scale = 8, nullable = false)
     private BigDecimal co;
 
-    @Column(name = "O3", precision = 25, scale = 20, nullable = false)
+    @Column(name = "O3", precision = 13, scale = 8, nullable = false)
     private BigDecimal o3;
 
-    @Column(name = "SO2", precision = 25, scale = 20, nullable = false)
+    @Column(name = "SO2", precision = 13, scale = 8, nullable = false)
     private BigDecimal so2;
 
 

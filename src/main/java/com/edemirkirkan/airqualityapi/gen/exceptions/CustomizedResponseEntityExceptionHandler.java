@@ -1,7 +1,7 @@
 package com.edemirkirkan.airqualityapi.gen.exceptions;
 
-import com.edemirkirkan.airqualityapi.log.dto.LogInfoDto;
-import com.edemirkirkan.airqualityapi.log.service.LogInfoService;
+import com.edemirkirkan.airqualityapi.log.error.dto.LogErrorDto;
+import com.edemirkirkan.airqualityapi.log.error.service.LogErrorService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -11,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.lang.NonNullApi;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -29,7 +28,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
-    private final LogInfoService logInfoService;
+    private final LogErrorService logErrorService;
 
     @ExceptionHandler
     public final ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest webRequest){
@@ -105,13 +104,13 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         String errorMessageBody = getObjectString(response.getBody());
         String errorHeaders = getObjectString(response.getHeaders());
 
-        LogInfoDto logErrorSaveDto = LogInfoDto.builder()
+        LogErrorDto logErrorSaveDto = LogErrorDto.builder()
                 .httpStatus(response.getStatusCode())
                 .headers(errorHeaders)
                 .body(errorMessageBody)
                 .build();
 
-        logInfoService.saveLog(logErrorSaveDto);
+        logErrorService.logErrorAndSave(logErrorSaveDto);
     }
 
     private String getObjectString(Object object) {

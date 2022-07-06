@@ -1,9 +1,9 @@
-package com.edemirkirkan.airqualityapi.log.service.entityservice;
+package com.edemirkirkan.airqualityapi.log.info.service.entityservice;
 
 
 import com.edemirkirkan.airqualityapi.gen.base.BaseEntityService;
-import com.edemirkirkan.airqualityapi.log.dao.LogInfoDao;
-import com.edemirkirkan.airqualityapi.log.entity.LogInfo;
+import com.edemirkirkan.airqualityapi.log.info.dao.LogInfoDao;
+import com.edemirkirkan.airqualityapi.log.info.entity.LogInfo;
 import org.springframework.stereotype.Service;
 
 @Service
