@@ -4,7 +4,7 @@ import com.edemirkirkan.airqualityapi.gen.exceptions.BusinessException;
 import com.edemirkirkan.airqualityapi.pol.dto.*;
 import com.edemirkirkan.airqualityapi.pol.entity.PolPollution;
 import com.edemirkirkan.airqualityapi.pol.enums.EnumPolPollutionQualityType;
-import com.edemirkirkan.airqualityapi.pol.enums.PolPollutionErrorMessage;
+import com.edemirkirkan.airqualityapi.pol.enums.EnumPolPollutionErrorMessage;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -51,7 +51,7 @@ public class PolPollutionConverter {
         if (300 < avg)
             return EnumPolPollutionQualityType.Hazardous;
 
-        throw new BusinessException(PolPollutionErrorMessage.AVG_POLLUTANTS_AMOUNT_CANNOT_BE_NEGATIVE);
+        throw new BusinessException(EnumPolPollutionErrorMessage.AVG_POLLUTANTS_AMOUNT_CANNOT_BE_NEGATIVE);
     }
 
     private EnumPolPollutionQualityType produceO3Label(Double avg) {
@@ -68,7 +68,7 @@ public class PolPollutionConverter {
         if (748 < avg)
             return EnumPolPollutionQualityType.Hazardous;
 
-        throw new BusinessException(PolPollutionErrorMessage.AVG_POLLUTANTS_AMOUNT_CANNOT_BE_NEGATIVE);
+        throw new BusinessException(EnumPolPollutionErrorMessage.AVG_POLLUTANTS_AMOUNT_CANNOT_BE_NEGATIVE);
     }
 
     private EnumPolPollutionQualityType produceSO2Label(Double avg) {
@@ -85,7 +85,7 @@ public class PolPollutionConverter {
         if (1600 < avg)
             return EnumPolPollutionQualityType.Hazardous;
 
-        throw new BusinessException(PolPollutionErrorMessage.AVG_POLLUTANTS_AMOUNT_CANNOT_BE_NEGATIVE);
+        throw new BusinessException(EnumPolPollutionErrorMessage.AVG_POLLUTANTS_AMOUNT_CANNOT_BE_NEGATIVE);
     }
 
 

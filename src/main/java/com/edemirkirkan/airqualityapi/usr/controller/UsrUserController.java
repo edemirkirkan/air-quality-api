@@ -7,20 +7,17 @@ import com.edemirkirkan.airqualityapi.usr.service.UsrUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("/api/v1")
 @RequiredArgsConstructor
 public class UsrUserController {
 
     private final UsrUserService usrUserService;
 
     @Operation(tags = "Authentication Controller", description = "Change password")
-    @PutMapping
+    @PatchMapping("password")
     public ResponseEntity<RestResponse<UsrUserResponseDto>> update(
             @RequestBody UsrUserUpdateRequestDto usrUserUpdateRequestDto){
 

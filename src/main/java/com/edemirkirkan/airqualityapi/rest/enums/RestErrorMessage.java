@@ -1,6 +1,6 @@
 package com.edemirkirkan.airqualityapi.rest.enums;
 
-import com.edemirkirkan.airqualityapi.gen.exceptions.BaseErrorMessage;
+import com.edemirkirkan.airqualityapi.gen.base.BaseErrorMessage;
 
 public enum RestErrorMessage implements BaseErrorMessage {
 

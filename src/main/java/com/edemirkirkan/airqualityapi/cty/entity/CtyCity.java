@@ -1,6 +1,6 @@
 package com.edemirkirkan.airqualityapi.cty.entity;
 
-import com.edemirkirkan.airqualityapi.gen.entity.BaseEntity;
+import com.edemirkirkan.airqualityapi.gen.base.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 

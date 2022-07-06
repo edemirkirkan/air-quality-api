@@ -1,6 +1,6 @@
 package com.edemirkirkan.airqualityapi.usr.converter;
 
-import com.edemirkirkan.airqualityapi.gen.sec.jwt.SecUserDetails;
+import com.edemirkirkan.airqualityapi.sec.jwt.SecUserDetails;
 import com.edemirkirkan.airqualityapi.usr.dto.UsrUserResponseDto;
 import com.edemirkirkan.airqualityapi.usr.dto.UsrUserSaveRequestDto;
 import com.edemirkirkan.airqualityapi.usr.entity.UsrUser;
@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-07-03T00:07:57+0300",
-    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 11.0.11 (AdoptOpenJDK)"
+    date = "2022-07-05T16:42:13+0300",
+    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 11.0.15 (Oracle Corporation)"
 )
 @Component
 public class UsrUserMapperImpl extends UsrUserMapper {

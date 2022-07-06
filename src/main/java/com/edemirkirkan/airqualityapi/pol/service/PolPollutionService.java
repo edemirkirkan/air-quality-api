@@ -10,7 +10,7 @@ import com.edemirkirkan.airqualityapi.pol.converter.PolPollutionConverter;
 import com.edemirkirkan.airqualityapi.pol.converter.PolPollutionMapper;
 import com.edemirkirkan.airqualityapi.pol.dto.PolPollutionDto;
 import com.edemirkirkan.airqualityapi.pol.entity.PolPollution;
-import com.edemirkirkan.airqualityapi.pol.enums.PolPollutionErrorMessage;
+import com.edemirkirkan.airqualityapi.pol.enums.EnumPolPollutionErrorMessage;
 import com.edemirkirkan.airqualityapi.rest.dto.RestResponseGeoDto;
 import com.edemirkirkan.airqualityapi.rest.dto.RestResponsePolDayDto;
 import com.edemirkirkan.airqualityapi.rest.service.RestService;
@@ -18,6 +18,7 @@ import com.edemirkirkan.airqualityapi.rest.dto.RestResponsePolDto;
 import com.edemirkirkan.airqualityapi.pol.dto.PolPollutionResponseDto;
 import com.edemirkirkan.airqualityapi.pol.service.entityservice.PolPollutionEntityService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +31,7 @@ import java.util.*;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class PolPollutionService {
     private final PolPollutionEntityService polPollutionEntityService;
     private final PolPollutionMapper polPollutionMapper;
@@ -49,6 +51,7 @@ public class PolPollutionService {
         if (ctyCity == null) {
             CtyCityDto ctyCityDto = queryApiForCity(city);
             ctyCity = ctyCityService.save(ctyCityDto);
+            log.info("ahmet");
         }
 
 
@@ -74,7 +77,7 @@ public class PolPollutionService {
 
         // calculate which periods of dates do not exist in db, and query the API for those periods
         List<Pair<Integer, Integer>> periodsToQuery = findDatePeriodsToQuery(daysBetween, foundIndices);
-        queryTheApiForPeriodsNotInDb(ctyCity, daysBetween, polPollutionList, periodsToQuery);
+        polPollutionList.addAll(queryTheApiForPeriodsNotInDb(ctyCity, daysBetween, periodsToQuery));
 
 
         sortByDate(polPollutionList);
@@ -106,29 +109,38 @@ public class PolPollutionService {
         return periodsToQuery;
     }
 
-    private void queryTheApiForPeriodsNotInDb(CtyCity ctyCity, List<Date> daysBetween, List<PolPollution> polPollutionList, List<Pair<Integer, Integer>> periodsToQuery) {
+    private List<PolPollution> queryTheApiForPeriodsNotInDb(CtyCity ctyCity, List<Date> daysBetween, List<Pair<Integer, Integer>> periodsToQuery) {
+        List<PolPollution> entityList = new ArrayList<>();
         for (Pair<Integer, Integer> period : periodsToQuery) {
             RestResponsePolDto restResponsePolDto = restService.polRequest(ctyCity.getLatitude(),
                     ctyCity.getLongitude(), daysBetween.get(period.getFirst()), daysBetween.get(period.getSecond()));
             List<RestResponsePolDayDto> restResponsePolDayDtoList = restResponsePolDto.getList();
-            getAverageAndSave(ctyCity, polPollutionList, restResponsePolDayDtoList);
+            entityList.addAll(retrieveEntityList(ctyCity, restResponsePolDayDtoList));
         }
+        return entityList;
     }
 
-    private void getAverageAndSave(CtyCity ctyCity, List<PolPollution> polPollutionList,
-                                   List<RestResponsePolDayDto> restResponsePolDayDtoList) {
+    private List<PolPollution> retrieveEntityList(CtyCity ctyCity, List<RestResponsePolDayDto> restResponsePolDayDtoList) {
         Map<String, BigDecimal> mapCO = new TreeMap<>();
         Map<String, BigDecimal> mapO3 = new TreeMap<>();
         Map<String, BigDecimal> mapSO2 = new TreeMap<>();
         Map<String, BigDecimal> hourCount = new TreeMap<>();
-        getSumOfPollutants(restResponsePolDayDtoList, mapCO, mapO3, mapSO2, hourCount);
-
-        getAverageAndConvertToResponse(polPollutionList, ctyCity, mapCO, mapO3, mapSO2, hourCount);
+        return calculateAverage(restResponsePolDayDtoList, ctyCity, mapCO, mapO3, mapSO2, hourCount);
     }
 
-    private void getSumOfPollutants(List<RestResponsePolDayDto> restResponsePolDayDtoList,
-                                    Map<String, BigDecimal> mapCO, Map<String, BigDecimal> mapO3,
-                                    Map<String, BigDecimal> mapSO2, Map<String, BigDecimal> hourCount) {
+    public void deletePollutionData(String city, String date) {
+        PolPollution polPollution = polPollutionEntityService.findByDateAndCityName(date, city);
+        if (polPollution == null) {
+            throw new BusinessException(EnumPolPollutionErrorMessage.ENTRY_CANNOT_FOUND);
+        }
+
+        polPollutionEntityService.delete(polPollution);
+    }
+
+    private List<PolPollution> calculateAverage(List<RestResponsePolDayDto> restResponsePolDayDtoList, CtyCity ctyCity,
+                                                Map<String, BigDecimal> mapCO, Map<String, BigDecimal> mapO3,
+                                                Map<String, BigDecimal> mapSO2, Map<String, BigDecimal> hourCount) {
+        List<PolPollution> polPollutionList = new ArrayList<>();
         for (RestResponsePolDayDto day : restResponsePolDayDtoList) {
             String currentDay =  DateUtil.timestampToString(day.getDt());
             mapCO.put(currentDay, mapCO.getOrDefault(currentDay, BigDecimal.ZERO).add(day.getComponents().getCo()));
@@ -136,30 +148,32 @@ public class PolPollutionService {
             mapSO2.put(currentDay, mapSO2.getOrDefault(currentDay, BigDecimal.ZERO).add(day.getComponents().getSo2()));
             hourCount.put(currentDay, hourCount.getOrDefault(currentDay, BigDecimal.ZERO).add(BigDecimal.ONE));
         }
-    }
-
-    private void getAverageAndConvertToResponse(List<PolPollution> polPollutionList, CtyCity ctyCity,
-                                                Map<String, BigDecimal> mapCO, Map<String, BigDecimal> mapO3,
-                                                Map<String, BigDecimal> mapSO2, Map<String, BigDecimal> hourCount){
         for (String currentDay : hourCount.keySet()) {
-            PolPollutionDto polPollutionDto = new PolPollutionDto();
-            polPollutionDto.setCtyCity(ctyCity);
-            polPollutionDto.setDate(currentDay);
-            polPollutionDto.setCo(mapCO.get(currentDay).divide(hourCount.get(currentDay), 20, RoundingMode.DOWN));
-            polPollutionDto.setO3(mapO3.get(currentDay).divide(hourCount.get(currentDay), 20, RoundingMode.DOWN));
-            polPollutionDto.setSo2(mapSO2.get(currentDay).divide(hourCount.get(currentDay), 20, RoundingMode.DOWN));
+            PolPollutionDto polPollutionDto = buildPolPollutionDto(ctyCity, mapCO, mapO3, mapSO2, hourCount, currentDay);
             PolPollution polPollution = polPollutionMapper.convertToPolPollution(polPollutionDto);
             polPollution = polPollutionEntityService.save(polPollution);
             polPollutionList.add(polPollution);
         }
+        return polPollutionList;
     }
+
+    private PolPollutionDto buildPolPollutionDto(CtyCity ctyCity, Map<String, BigDecimal> mapCO, Map<String, BigDecimal> mapO3, Map<String, BigDecimal> mapSO2, Map<String, BigDecimal> hourCount, String currentDay) {
+        PolPollutionDto polPollutionDto = new PolPollutionDto();
+        polPollutionDto.setCtyCity(ctyCity);
+        polPollutionDto.setDate(currentDay);
+        polPollutionDto.setCo(mapCO.get(currentDay).divide(hourCount.get(currentDay), 20, RoundingMode.DOWN));
+        polPollutionDto.setO3(mapO3.get(currentDay).divide(hourCount.get(currentDay), 20, RoundingMode.DOWN));
+        polPollutionDto.setSo2(mapSO2.get(currentDay).divide(hourCount.get(currentDay), 20, RoundingMode.DOWN));
+        return polPollutionDto;
+    }
+
 
     private void validateApiCutoffDate(Date startDate, Date endDate) {
         LocalDateTime apiCutOffDate = LocalDateTime.of(2020, Month.NOVEMBER,27,0, 0);
 
         if (DateUtil.dateToLocalDate(startDate).isBefore(ChronoLocalDate.from(apiCutOffDate))
                 || DateUtil.dateToLocalDate(endDate).isBefore(ChronoLocalDate.from(apiCutOffDate)) ) {
-            throw new BusinessException(PolPollutionErrorMessage.DATE_BEFORE_CUTOFF_CANNOT_BE_QUERIED);
+            throw new BusinessException(EnumPolPollutionErrorMessage.DATE_BEFORE_CUTOFF_CANNOT_BE_QUERIED);
         }
     }
 
@@ -176,6 +190,5 @@ public class PolPollutionService {
         CtyCityDto ctyCityDto = ctyCityMapper.convertToCtyCityDto(restResponseGeoDto);
         return ctyCityDto;
     }
-
 
 }

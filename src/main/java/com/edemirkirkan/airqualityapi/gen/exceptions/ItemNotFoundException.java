@@ -1,5 +1,6 @@
 package com.edemirkirkan.airqualityapi.gen.exceptions;
 
+import com.edemirkirkan.airqualityapi.gen.base.BaseErrorMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 

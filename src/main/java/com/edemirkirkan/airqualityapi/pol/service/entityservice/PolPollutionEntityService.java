@@ -1,6 +1,6 @@
 package com.edemirkirkan.airqualityapi.pol.service.entityservice;
 
-import com.edemirkirkan.airqualityapi.gen.entity.service.BaseEntityService;
+import com.edemirkirkan.airqualityapi.gen.base.BaseEntityService;
 import com.edemirkirkan.airqualityapi.pol.dao.PolPollutionDao;
 import com.edemirkirkan.airqualityapi.pol.entity.PolPollution;
 import org.springframework.stereotype.Service;

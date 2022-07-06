@@ -2,8 +2,8 @@ package com.edemirkirkan.airqualityapi.usr.service;
 
 import com.edemirkirkan.airqualityapi.gen.exceptions.BusinessException;
 import com.edemirkirkan.airqualityapi.gen.exceptions.ErrorMessage;
-import com.edemirkirkan.airqualityapi.gen.sec.jwt.SecUserDetails;
-import com.edemirkirkan.airqualityapi.gen.sec.jwt.SecUserDetailsService;
+import com.edemirkirkan.airqualityapi.sec.jwt.SecUserDetails;
+import com.edemirkirkan.airqualityapi.sec.jwt.SecUserDetailsService;
 import com.edemirkirkan.airqualityapi.usr.converter.UsrUserMapper;
 import com.edemirkirkan.airqualityapi.usr.dto.UsrUserResponseDto;
 import com.edemirkirkan.airqualityapi.usr.dto.UsrUserSaveRequestDto;

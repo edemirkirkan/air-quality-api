@@ -1,5 +1,6 @@
 package com.edemirkirkan.airqualityapi.gen.exceptions;
 
+import com.edemirkirkan.airqualityapi.gen.base.BaseErrorMessage;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;

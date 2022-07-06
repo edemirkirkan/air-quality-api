@@ -1,14 +1,12 @@
 package com.edemirkirkan.airqualityapi.pol.entity;
 
 import com.edemirkirkan.airqualityapi.cty.entity.CtyCity;
-import com.edemirkirkan.airqualityapi.gen.entity.BaseEntity;
+import com.edemirkirkan.airqualityapi.gen.base.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
 
 @Entity
 @Table(name = "POL_POLLUTION")

@@ -1,6 +1,6 @@
 package com.edemirkirkan.airqualityapi.usr.converter;
 
-import com.edemirkirkan.airqualityapi.gen.sec.jwt.SecUserDetails;
+import com.edemirkirkan.airqualityapi.sec.jwt.SecUserDetails;
 import com.edemirkirkan.airqualityapi.usr.dto.UsrUserResponseDto;
 import com.edemirkirkan.airqualityapi.usr.dto.UsrUserSaveRequestDto;
 import com.edemirkirkan.airqualityapi.usr.entity.UsrUser;

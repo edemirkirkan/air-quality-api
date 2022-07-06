@@ -1,7 +1,8 @@
 package com.edemirkirkan.airqualityapi.gen.utils;
 
 import com.edemirkirkan.airqualityapi.gen.exceptions.BusinessException;
-import com.edemirkirkan.airqualityapi.pol.enums.PolPollutionErrorMessage;
+import com.edemirkirkan.airqualityapi.pol.enums.EnumPolPollutionErrorMessage;
+import org.springframework.data.util.Pair;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,7 +28,7 @@ public class DateUtil {
         try {
             date = simpleDateFormat.parse(dateStr);
         } catch (ParseException ex) {
-            throw new BusinessException(PolPollutionErrorMessage.WRONG_DATE_FORMAT);
+            throw new BusinessException(EnumPolPollutionErrorMessage.WRONG_DATE_FORMAT);
         }
         return date;
     }
@@ -99,6 +100,14 @@ public class DateUtil {
         }
 
         return calendar;
+    }
+
+    public static Pair<String, String> getLastWeek() {
+        Calendar cal = Calendar.getInstance();
+        String endDate = DateUtil.dateToString(cal.getTime());
+        cal.add(Calendar.DATE, -6);
+        String startDate = DateUtil.dateToString(cal.getTime());
+        return Pair.of(startDate, endDate);
     }
 
 }

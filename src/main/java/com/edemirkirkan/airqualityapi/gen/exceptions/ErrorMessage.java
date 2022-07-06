@@ -1,12 +1,11 @@
 package com.edemirkirkan.airqualityapi.gen.exceptions;
 
+import com.edemirkirkan.airqualityapi.gen.base.BaseErrorMessage;
+
 public enum ErrorMessage implements BaseErrorMessage {
 
     ITEM_NOT_FOUND("Item not found!"),
-    PARAMETER_CANNOT_BE_NULL("Parameter cannot be null"),
-    CHAR_COUNT_CANNOT_BE_ZERO_OR_NEGATIVE("Char count cannot be zero or negative!"),
-    DATE_COULD_NOT_BE_CONVERTED("Date could not be converted!")
-    ;
+    PARAMETER_CANNOT_BE_NULL("Parameter cannot be null");
 
     private final String message;
 
