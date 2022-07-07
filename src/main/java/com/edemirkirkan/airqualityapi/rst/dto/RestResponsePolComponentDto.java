@@ -1,4 +1,4 @@
-package com.edemirkirkan.airqualityapi.rest.dto;
+package com.edemirkirkan.airqualityapi.rst.dto;
 
 import lombok.Data;
 

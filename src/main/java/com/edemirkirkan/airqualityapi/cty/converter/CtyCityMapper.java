@@ -2,7 +2,7 @@ package com.edemirkirkan.airqualityapi.cty.converter;
 
 import com.edemirkirkan.airqualityapi.cty.dto.CtyCityDto;
 import com.edemirkirkan.airqualityapi.cty.entity.CtyCity;
-import com.edemirkirkan.airqualityapi.rest.dto.RestResponseGeoDto;
+import com.edemirkirkan.airqualityapi.rst.dto.RestResponseGeoDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;

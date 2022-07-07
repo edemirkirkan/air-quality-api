@@ -1,4 +1,4 @@
-package com.edemirkirkan.airqualityapi.rest.enums;
+package com.edemirkirkan.airqualityapi.rst.enums;
 
 import com.edemirkirkan.airqualityapi.gen.base.BaseErrorMessage;
 

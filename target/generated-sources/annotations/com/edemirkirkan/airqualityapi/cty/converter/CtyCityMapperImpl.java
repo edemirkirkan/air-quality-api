@@ -2,13 +2,13 @@ package com.edemirkirkan.airqualityapi.cty.converter;
 
 import com.edemirkirkan.airqualityapi.cty.dto.CtyCityDto;
 import com.edemirkirkan.airqualityapi.cty.entity.CtyCity;
-import com.edemirkirkan.airqualityapi.rest.dto.RestResponseGeoDto;
+import com.edemirkirkan.airqualityapi.rst.dto.RestResponseGeoDto;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-07-07T04:22:01+0300",
+    date = "2022-07-07T14:01:43+0300",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 11.0.11 (AdoptOpenJDK)"
 )
 @Component

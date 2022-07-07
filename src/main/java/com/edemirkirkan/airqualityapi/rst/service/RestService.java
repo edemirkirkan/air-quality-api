@@ -1,10 +1,10 @@
-package com.edemirkirkan.airqualityapi.rest.service;
+package com.edemirkirkan.airqualityapi.rst.service;
 
 import com.edemirkirkan.airqualityapi.gen.exceptions.BusinessException;
 import com.edemirkirkan.airqualityapi.gen.utils.DateUtil;
-import com.edemirkirkan.airqualityapi.rest.dto.RestResponseGeoDto;
-import com.edemirkirkan.airqualityapi.rest.dto.RestResponsePolDto;
-import com.edemirkirkan.airqualityapi.rest.enums.RestErrorMessage;
+import com.edemirkirkan.airqualityapi.rst.dto.RestResponseGeoDto;
+import com.edemirkirkan.airqualityapi.rst.dto.RestResponsePolDto;
+import com.edemirkirkan.airqualityapi.rst.enums.RestErrorMessage;
 import org.apache.http.client.utils.URIBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

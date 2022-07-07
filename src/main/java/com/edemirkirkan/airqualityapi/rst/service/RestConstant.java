@@ -1,4 +1,4 @@
-package com.edemirkirkan.airqualityapi.rest.service;
+package com.edemirkirkan.airqualityapi.rst.service;
 
 public class RestConstant {
     public static final String APPID = "0b008e5c56952101fcd851de8fe708a6";
