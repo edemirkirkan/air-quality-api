@@ -13,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -47,7 +46,7 @@ public class LogInfoService {
 
     private String buildLogSubject(LogInfo logInfo, String cityName) {
         return logInfo.getEntity().equals(EnumLogInfoEntityType.City) ?
-                cityName : cityName + " - " + logInfo.getPolPollutionDate();
+                cityName : cityName + ", " + logInfo.getPolPollutionDate();
     }
 
     private String buildLogUserText(Long currentUserId) {
