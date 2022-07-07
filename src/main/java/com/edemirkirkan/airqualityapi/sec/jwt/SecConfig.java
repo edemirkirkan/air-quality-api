@@ -84,7 +84,7 @@ public class SecConfig extends  WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(
+                .antMatchers("/air-quality-api/**",
                         "/api/v1/auth/**",
                         "/swagger-ui/**",
                         "/swagger-ui.html",
