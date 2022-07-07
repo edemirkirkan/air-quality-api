@@ -20,7 +20,7 @@ public class AirQualityApiApplication {
 
 	@Bean
 	RouterFunction<ServerResponse> routerFunction() {
-		return route(GET("/"), req ->
+		return route(GET("/index.html"), req ->
 				ServerResponse.temporaryRedirect(URI.create("/swagger-ui/index.html")).build());
 	}
 
