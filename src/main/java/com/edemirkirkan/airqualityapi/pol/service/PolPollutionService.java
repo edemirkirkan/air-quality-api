@@ -28,6 +28,16 @@ public class PolPollutionService {
     private final CtyCityService ctyCityService;
 
     public PolPollutionResponseDto getPollutionData(String city, String startDateStr, String endDateStr) {
+        String[] acceptedCities = new String[]{"London", "Barcelona", "Ankara", "Tokyo", "Mumbai"};
+        if (!Arrays.asList(acceptedCities).contains(city)) {
+            throw new BusinessException(EnumPolPollutionErrorMessage.NOT_ACCEPTED_CITY);
+        }
+        // if dates sent empty, get the last week by default
+        if (startDateStr.isEmpty() && endDateStr.isEmpty()) {
+            Pair<String, String> lastWeek = DateUtil.getLastWeek();
+            startDateStr = lastWeek.getFirst();
+            endDateStr = lastWeek.getSecond();
+        }
         Date startDate = DateUtil.atStartOfDay(DateUtil.stringToDate(startDateStr));
         Date endDate = DateUtil.atEndOfDay(DateUtil.stringToDate(endDateStr));
         polPollutionHelperService.validateApiCutoffDate(startDate, endDate);
@@ -97,6 +107,7 @@ public class PolPollutionService {
 
     public void deletePollutionData(String city, String date) {
         PolPollution polPollution = polPollutionEntityService.findByDateAndCityName(date, city);
+
         if (polPollution == null) {
             throw new BusinessException(EnumPolPollutionErrorMessage.ENTRY_CANNOT_FOUND);
         }
