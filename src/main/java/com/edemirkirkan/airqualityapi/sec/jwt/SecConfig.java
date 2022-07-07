@@ -75,12 +75,6 @@ public class SecConfig extends  WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.formLogin()
-                .loginPage("/login.html")
-                .failureUrl("/login-error.html")
-                .and()
-                .logout()
-                .logoutSuccessUrl("/index.html");
         httpSecurity
                 .cors()
                 .and()
@@ -90,7 +84,7 @@ public class SecConfig extends  WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/ui/**",
+                .antMatchers("/**",
                         "/api/v1/auth/**",
                         "/swagger-ui/**",
                         "/swagger-ui.html",
