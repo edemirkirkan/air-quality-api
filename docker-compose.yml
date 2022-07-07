@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+  app:
+    image: 'air-quality-api'
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    container_name: air-quality-api-app
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/AirQualityApi
+      - SPRING_DATASOURCE_USERNAME=AirQualityApi
+      - SPRING_DATASOURCE_PASSWORD=AirQualityApi
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+  db:
+    image: 'postgres:latest'
+    container_name: air-quality-api-db
+    environment:
+      - POSTGRES_USER=AirQualityApi
+      - POSTGRES_PASSWORD=AirQualityApi
