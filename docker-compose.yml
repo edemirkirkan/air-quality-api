@@ -17,7 +17,7 @@ services:
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
 
   db:
-    image: 'postgres:latest'
+    image: 'postgres:latest' # update this line with the name of your Postgres image
     container_name: air-quality-api-db
     environment:
       - POSTGRES_USER=AirQualityApi

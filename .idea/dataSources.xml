@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="air-quality-api/Hibernate" uuid="fa9c9709-f229-46c3-b95e-e0c71369d270">
-      <driver-ref>postgresql</driver-ref>
-      <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>Hibernate</remarks>
-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/AirQuality</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="AirQuality@localhost" uuid="8dd23f13-56f2-46c1-ae20-28de625982ed">
+    <data-source source="LOCAL" name="PostgreSQL - AirQuality@localhost" uuid="8dd23f13-56f2-46c1-ae20-28de625982ed">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
