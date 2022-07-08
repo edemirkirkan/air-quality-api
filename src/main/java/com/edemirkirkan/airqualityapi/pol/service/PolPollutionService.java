@@ -50,7 +50,7 @@ public class PolPollutionService {
                     EnumLogInfoActionType.retrieved, EnumLogInfoDataSourceType.database, null);
         }
         else {
-            polPollutionHelperService. logMsg("Database does not contain a city named '"
+            polPollutionHelperService.logMsg("Database does not contain a city named '"
                     + city + "' Now, retrieving...");
             CtyCityDto ctyCityDto = polPollutionHelperService.queryApiForCity(city);
             polPollutionHelperService.logAction(city, EnumLogInfoEntityType.City, EnumLogInfoActionType.retrieved

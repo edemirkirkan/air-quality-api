@@ -50,6 +50,9 @@ public class LogInfoService {
     }
 
     private String buildLogUserText(Long currentUserId) {
+        if (currentUserId == null) {
+            return "";
+        }
         Optional<UsrUser> user = usrUserEntityService.findById(currentUserId);
         String userName = user.map(UsrUser::getUsername).orElse(null);
         return userName != null ? " by user named '" + userName + "'" : "";

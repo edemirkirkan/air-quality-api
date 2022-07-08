@@ -1,17 +1,13 @@
 package com.edemirkirkan.airqualityapi.log.info.entity;
 
-import com.edemirkirkan.airqualityapi.cty.entity.CtyCity;
 import com.edemirkirkan.airqualityapi.gen.base.BaseEntity;
 import com.edemirkirkan.airqualityapi.log.info.enums.EnumLogInfoActionType;
 import com.edemirkirkan.airqualityapi.log.info.enums.EnumLogInfoDataSourceType;
 import com.edemirkirkan.airqualityapi.log.info.enums.EnumLogInfoEntityType;
-import com.edemirkirkan.airqualityapi.pol.entity.PolPollution;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.http.HttpStatus;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "LOG_INFO")
