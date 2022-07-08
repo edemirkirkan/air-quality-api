@@ -1,4 +1,6 @@
-# Air Quality Api
+# Air Quality Restful Api
+
+**Retrieve the historical air pollution data by specified city and dates.**
 
 # Documentations for the api can be found at
 - https://edemirkirkan.github.io/air-quality-api/
@@ -18,7 +20,7 @@
            
 # SwaggerUI
 
-### REST Documentation
+### App Routes
 ![Alt text](./src/main/resources/static/images/full_page.png?raw=true "full_page")
 
 ### Register
