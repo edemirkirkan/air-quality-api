@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -56,7 +57,7 @@ public class UsrUserService {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        SecUserDetails userDetails = (SecUserDetails) secUserDetailsService.loadUserByUsername(((SecUserDetails) authentication.getPrincipal()).getUsername());
+         SecUserDetails userDetails = (SecUserDetails) secUserDetailsService.loadUserByUsername(((SecUserDetails) authentication.getPrincipal()).getUsername());
 
         if (!Objects.equals(usrUserUpdateRequestDto.getNewPassword(), usrUserUpdateRequestDto.getNewPasswordAgain())) {
             throw new BusinessException(UsrErrorMessage.PASSWORDS_NOT_MATCHING);

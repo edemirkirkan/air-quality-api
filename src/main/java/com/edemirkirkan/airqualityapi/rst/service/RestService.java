@@ -17,6 +17,7 @@ import java.util.Date;
 @Service
 public class RestService {
 
+
     public RestResponseGeoDto geoRequest(String cityName)  {
 
         String url = buildUrl(

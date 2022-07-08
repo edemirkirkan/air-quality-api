@@ -1,18 +1,15 @@
 package com.edemirkirkan.airqualityapi.pol.service;
 
-import com.edemirkirkan.airqualityapi.cty.service.CtyCityService;
-import com.edemirkirkan.airqualityapi.gen.exceptions.BusinessException;
 import com.edemirkirkan.airqualityapi.gen.exceptions.ItemNotFoundException;
-import com.edemirkirkan.airqualityapi.pol.converter.PolPollutionConverter;
-import com.edemirkirkan.airqualityapi.pol.dto.PolPollutionResponseDto;
 import com.edemirkirkan.airqualityapi.pol.entity.PolPollution;
-import com.edemirkirkan.airqualityapi.pol.enums.EnumPolPollutionErrorMessage;
 import com.edemirkirkan.airqualityapi.pol.service.entityservice.PolPollutionEntityService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 
 import static org.mockito.Mockito.*;
 
@@ -24,26 +21,14 @@ class PolPollutionServiceTest {
     @Mock
     private PolPollutionEntityService polPollutionEntityService;
 
+    @Spy
     @InjectMocks
     private PolPollutionService polPollutionService;
 
     @Test
-    void shouldGetPollutionData() {
-        String city = "Ankara";
-        String startDate ="18-02-2021";
-        String endDate = "25-02-2021";
-        PolPollutionResponseDto polPollutionResponseDto = polPollutionService.getPollutionData(city, startDate, endDate);
-        assertNull(polPollutionResponseDto);
-    }
-
-    @Test
-    void shouldNotGetPollutionDataWhenStartDateIsBefore() {
-        String city = "Ankara";
-        String startDate ="25-02-2021";
-        String endDate = "18-02-2021";
-        when(polPollutionService.getPollutionData(city, startDate, endDate)).thenThrow(BusinessException.class);
-        assertThrows(BusinessException.class,
-                () ->  polPollutionService.getPollutionData(city, startDate, endDate));
+    void shouldThrowExceptionWhenOneOfDatesIsNull() {
+        assertThrows(NullPointerException.class, () -> polPollutionService.getPollutionData("Ankara", null, "25-16-2021"));
+        assertThrows(NullPointerException.class, () -> polPollutionService.getPollutionData("Ankara", "21-13-2030", null));
     }
 
 

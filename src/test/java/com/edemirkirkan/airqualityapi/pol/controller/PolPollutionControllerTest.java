@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 class PolPollutionControllerTest extends BaseTest {
     private MockMvc mockMvc;
-
+    private static final String BASE_PATH = "/api/v1/pollutions";
     @Autowired
     private WebApplicationContext webApplicationContext;
 
@@ -39,7 +39,7 @@ class PolPollutionControllerTest extends BaseTest {
     @Test
     void getPollutionData() throws Exception {
         int expectedDayResult = 5;
-        MvcResult mvcResult = mockMvc.perform(get("/api/v1/pollutions")
+        MvcResult mvcResult = mockMvc.perform(get(BASE_PATH)
                         .param("city", "Ankara")
                         .param("startDate", "22-02-2021")
                         .param("endDate", "26-02-2021")
@@ -52,7 +52,7 @@ class PolPollutionControllerTest extends BaseTest {
 
     @Test
     void deletePollutionData() throws Exception {
-        MvcResult mvcResult = mockMvc.perform(delete("/api/v1/pollutions")
+        MvcResult mvcResult = mockMvc.perform(delete(BASE_PATH)
                         .param("city", "Ankara")
                         .param("date", "22-02-2021")
                         .contentType(MediaType.APPLICATION_JSON))

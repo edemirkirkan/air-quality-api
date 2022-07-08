@@ -3,7 +3,6 @@ package com.edemirkirkan.airqualityapi.sec.auth;
 import com.edemirkirkan.airqualityapi.gen.exceptions.RestResponse;
 import com.edemirkirkan.airqualityapi.usr.dto.UsrUserResponseDto;
 import com.edemirkirkan.airqualityapi.usr.dto.UsrUserSaveRequestDto;
-import com.edemirkirkan.airqualityapi.usr.dto.UsrUserUpdateRequestDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;

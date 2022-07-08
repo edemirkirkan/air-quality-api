@@ -15,7 +15,10 @@ public class PolPollutionConverter {
 
     public PolPollutionResponseDto convertToPolPollutionResponseDto(List<PolPollution> polPollutionList) {
         PolPollutionResponseDto polPollutionResponseDto = new PolPollutionResponseDto();
-        polPollutionResponseDto.setCity(polPollutionList.get(0).getCtyCity().getName());
+        if (polPollutionList.size() != 0) {
+            polPollutionResponseDto.setCity(polPollutionList.get(0).getCtyCity().getName());
+        }
+
         List<PolPollutionResultDto> results = new ArrayList<>();
         for (PolPollution polPollution : polPollutionList) {
             PolPollutionResultDto polPollutionResultDto = new PolPollutionResultDto();

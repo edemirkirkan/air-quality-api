@@ -34,8 +34,6 @@ class DateUtilTest {
 
     @Test
     void shouldNotConvertToStringWhenTheParameterIsNull() {
-
         assertThrows(NullPointerException.class, () -> DateUtil.dateToString(null));
-
     }
 }

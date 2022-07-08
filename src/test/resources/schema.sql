@@ -1,0 +1,13 @@
+create sequence cty_city_id_seq start with 1 increment by 50;
+create sequence log_error_id_seq start with 1 increment by 50;
+create sequence log_info_id_seq start with 1 increment by 50;
+create sequence pol_pollution_id_seq start with 1 increment by 50;
+create sequence usr_user_id_seq start with 1 increment by 50;
+create table cty_city (id bigint not null, create_date timestamp, created_by bigint, update_date timestamp, updated_by bigint, country_code varchar(255) not null, latitude numeric(7,4) not null, longitude numeric(7,4) not null, name varchar(30) not null, primary key (id));
+create table log_error (id bigint not null, create_date timestamp, created_by bigint, update_date timestamp, updated_by bigint, body varchar(4000), error_date timestamp, headers varchar(4000), http_status varchar(50), id_usr_user bigint, primary key (id));
+create table log_info (id bigint not null, create_date timestamp, created_by bigint, update_date timestamp, updated_by bigint, type varchar(20), cty_city_name varchar(30), entity varchar(20), pol_pollution_date varchar(20), source varchar(20), id_usr_user bigint, primary key (id));
+create table pol_pollution (id bigint not null, create_date timestamp, created_by bigint, update_date timestamp, updated_by bigint, co numeric(13,8) not null, "date" varchar(20) not null, o3 numeric(13,8) not null, so2 numeric(13,8) not null, id_cty_city bigint, primary key (id));
+create table usr_user (id bigint not null, create_date timestamp, created_by bigint, update_date timestamp, updated_by bigint, first_name varchar(100) not null, last_name varchar(100) not null, password varchar(255) not null, username varchar(100) not null, primary key (id));
+alter table cty_city add constraint UK_3j4r4r4tynlbx42xpl2e8c405 unique (name);
+alter table usr_user add constraint UK_lkdax67exu02awh2drsmn1v8b unique (username);
+alter table pol_pollution add constraint FKabwsdmft9ve4e8fok6j8wng2o foreign key (id_cty_city) references cty_city;

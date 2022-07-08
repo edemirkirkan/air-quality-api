@@ -85,7 +85,7 @@ public class UsrUserController {
                             }
                     )
             ))
-    @PatchMapping("password")
+    @PatchMapping("/password")
     public ResponseEntity<RestResponse<UsrUserResponseDto>> changePassword(
             @RequestBody UsrUserUpdateRequestDto usrUserUpdateRequestDto){
 
