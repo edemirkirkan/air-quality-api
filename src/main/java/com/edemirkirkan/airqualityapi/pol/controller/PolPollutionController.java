@@ -22,7 +22,7 @@ public class PolPollutionController {
     @GetMapping()
     @Operation(
             tags = "Pollutant Data Controller",
-            summary = "Retrieves the pollutant data with the specified city and interval",
+            summary = "Retrieve the pollutant data with the specified city and date interval",
             description = "## Description\nThis endpoint categorize and returns the health hazards of *Monoxide(CO)*, " +
                     "*Ozone(S02)*, and *Sulphur Dioxide(O3)* substances using real historical data and the following " +
                     "*pollutants and health breakpoints* table published unanimously by governments." +
@@ -102,7 +102,7 @@ public class PolPollutionController {
 
 
     @DeleteMapping()
-    @Operation(tags = "Pollutant Data Controller", summary = "Deletes the pollutant data with the specified city and date",
+    @Operation(tags = "Pollutant Data Controller", summary = "Delete the pollutant data with the specified city and date",
                 parameters = {
                         @Parameter(name = "city", in = ParameterIn.QUERY, required = true, description = "Note: API " +
                         "can only query the following cities\n- *London*\n- *Barcelona*\n- *Ankara*\n- *Tokyo*\n- *Mumbai*" +
