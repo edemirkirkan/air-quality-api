@@ -9,7 +9,9 @@
 # To run application with Docker
     1. install Docker, and setup any Docker Postgres image you want
     2. update the name of the Postgres image in 'docker-compose.yml' file
-    3. comment localhost datasource credentials, and uncomment postgredb:5432 with its credentials
+    3. update the application.properties file
+           3.1 comment localhost:5432 datasource credentials  
+           3.2 uncomment postgredb:5432 with its credentials
     4. finally, run following commands at the project folder CLI, respectively
            4.1. docker build . -t air-quality-api:1.0
            4.2. docker-compose up
