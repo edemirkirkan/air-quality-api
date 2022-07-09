@@ -38,7 +38,20 @@
 
 ![Alt text](./src/main/resources/static/images/pollution_2.png?raw=true "pollution_2")
  
+**Sample Input/Output within Specified Date Range**
+![Alt text](./src/main/resources/static/images/pollution_5.png?raw=true "pollution_5")
+
+![Alt text](./src/main/resources/static/images/pollution_6.png?raw=true "pollution_6")
+
+**Sample Input/Output without Specified Date Range**<br>
+*Note: Last week will be taken into consideration if both start and end date values are sent empty.*
 ![Alt text](./src/main/resources/static/images/pollution_3.png?raw=true "pollution_3")
+
+![Alt text](./src/main/resources/static/images/pollution_4.png?raw=true "pollution_4")
+
+**Logs Produced During the Request**<br>
+*Note: OpenWeatherApi is not queried if the queried date range already exists in the database. It is queried only when needed* 
+![Alt text](./src/main/resources/static/images/pollution_7.png?raw=true "pollution_7")
 
 ### Delete Pollutant Data
 ![Alt text](./src/main/resources/static/images/delete.png?raw=true "delete")
